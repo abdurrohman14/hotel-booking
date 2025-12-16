@@ -62,26 +62,36 @@
                                         </td>
 
                                         {{-- Dropdown Update Status --}}
-                                        <td>
+                                        <td class="text-center">
+                                            {{-- CONFIRM --}}
                                             <form action="{{ route('reservation.updateStatus', $reserv->id) }}"
-                                                method="POST">
+                                                method="POST" class="d-inline">
                                                 @csrf
                                                 @method('PATCH')
+                                                <input type="hidden" name="status" value="confirmation">
 
-                                                <select name="status" class="form-select form-select-sm mb-2">
-                                                    <option value="pending"
-                                                        {{ $reserv->reservation_status == 'pending' ? 'selected' : '' }}>
-                                                        Pending</option>
-                                                    <option value="confirmation"
-                                                        {{ $reserv->reservation_status == 'confirmation' ? 'selected' : '' }}>
-                                                        Confirmation</option>
-                                                    <option value="cancel"
-                                                        {{ $reserv->reservation_status == 'cancel' ? 'selected' : '' }}>
-                                                        Cancel</option>
-                                                </select>
+                                                <button type="submit"
+                                                    class="btn btn-sm
+                {{ $reserv->reservation_status == 'confirmation' ? 'btn-success' : 'btn-outline-success' }}"
+                                                    title="Confirm"
+                                                    {{ $reserv->reservation_status == 'confirmation' ? 'disabled' : '' }}>
+                                                    <i class="bi bi-check-lg"></i>
+                                                </button>
+                                            </form>
 
-                                                <button type="submit" class="btn btn-primary btn-sm w-100">
-                                                    Update
+                                            {{-- CANCEL --}}
+                                            <form action="{{ route('reservation.updateStatus', $reserv->id) }}"
+                                                method="POST" class="d-inline ms-1">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="status" value="cancel">
+
+                                                <button type="submit"
+                                                    class="btn btn-sm
+                {{ $reserv->reservation_status == 'cancel' ? 'btn-danger' : 'btn-outline-danger' }}"
+                                                    title="Cancel"
+                                                    {{ $reserv->reservation_status == 'cancel' ? 'disabled' : '' }}>
+                                                    <i class="bi bi-x-lg"></i>
                                                 </button>
                                             </form>
                                         </td>

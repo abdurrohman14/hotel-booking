@@ -52,7 +52,7 @@
                                     <tr class="align-middle">
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $rooms->room_name }}</td>
-                                        <td>{{ $rooms->rates }}</td>
+                                        <td>Rp. {{ number_format($rooms->rates) }}</td>
                                         <td><span class="badge text-bg-danger">{{ $rooms->image_url }}</span></td>
                                         <td><a href="{{ route('room.edit', $rooms->id) }}"
                                                 class="btn btn-sm btn-warning text-white">
